@@ -5,6 +5,7 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
+import layoutEnergy from '@/layoutEnergy'
 
 /* Router Modules */
 import componentsRouter from './modules/components'
@@ -77,8 +78,21 @@ export const constantRoutes = [
   },
   {
     path: '',
-    component: Layout,
+    component: layoutEnergy,
     redirect: 'dashboard',
+    children: [
+      {
+        path: 'dashboard',
+        component: () => import('@/views/busystem-index/index'),
+        name: 'Busystem-index',
+        meta: { title: 'busystem-index', icon: 'dashboard', noCache: true, affix: true }
+      }
+    ]
+  },
+  {
+    path: '/dashboard',
+    component: Layout,
+    // redirect: 'dashboard',
     children: [
       {
         path: 'dashboard',

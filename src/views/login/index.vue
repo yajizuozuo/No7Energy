@@ -3,10 +3,14 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
+        <p class="imgBox">
+          <img src="./logo.png">
+        </p>
         <h3 class="title">
-          {{ $t('login.title') }}
+          <!-- {{ $t('login.title') }} -->
+          Welcome to login
         </h3>
-        <lang-select class="set-language" />
+        <!-- <lang-select class="set-language" /> -->
       </div>
 
       <el-form-item prop="username">
@@ -64,30 +68,27 @@
           <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
         </div>
 
-        <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
+        <!-- <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
           {{ $t('login.thirdparty') }}
-        </el-button>
+        </el-button> -->
       </div>
     </el-form>
 
-    <el-dialog :title="$t('login.thirdparty')" :visible.sync="showDialog">
+    <!-- <el-dialog :title="$t('login.thirdparty')" :visible.sync="showDialog">
       {{ $t('login.thirdpartyTips') }}
       <br>
       <br>
       <br>
       <social-sign />
-    </el-dialog>
+    </el-dialog> -->
   </div>
 </template>
 
 <script>
 import { validUsername } from '@/utils/validate'
-import LangSelect from '@/components/LangSelect'
-import SocialSign from './components/SocialSignin'
 
 export default {
   name: 'Login',
-  components: { LangSelect, SocialSign },
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
@@ -119,14 +120,14 @@ export default {
       redirect: undefined
     }
   },
-  // watch: {
-  //   $route: {
-  //     handler: function(route) {
-  //       this.redirect = route.query && route.query.redirect
-  //     },
-  //     immediate: true
-  //   }
-  // },
+  watch: {
+    $route: {
+      handler: function(route) {
+        this.redirect = route.query && route.query.redirect
+      },
+      immediate: true
+    }
+  },
   created() {
     // window.addEventListener('storage', this.afterQRScan)
   },
@@ -258,16 +259,22 @@ $light_gray:#eee;
 .login-container {
   min-height: 100%;
   width: 100%;
+  height: 100%;
   background-color: $bg;
   overflow: hidden;
+  background: url(./background.png) no-repeat center;
+  background-size: cover;
 
   .login-form {
     position: relative;
-    width: 520px;
+    width: 320px;
     max-width: 100%;
-    padding: 160px 35px 0;
-    margin: 0 auto;
+    min-height: 100%;
+    padding: 60px 35px 0;
+    margin-left: 63%;
     overflow: hidden;
+    background: url(./loginForm.png) no-repeat center;
+    background-size: cover;
   }
 
   .tips {
@@ -292,7 +299,13 @@ $light_gray:#eee;
 
   .title-container {
     position: relative;
-
+    .imgBox {
+      text-align: center;
+      img {
+        display: inline-block;
+        width: 35%;
+      }
+    }
     .title {
       font-size: 26px;
       color: $light_gray;
