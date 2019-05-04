@@ -1,7 +1,9 @@
 <template>
   <div class="timerBox">
     <div class="timeNum">
-      {{ hour }} {{ minute }} {{ second }}
+      <span>{{ hour }}</span>
+      <span>{{ minute }}</span>
+      <span>{{ second }}</span>
     </div>
     <p class="date">{{ year }}年{{ month }}月{{ date }}号  {{ week }}</p>
   </div>
@@ -57,10 +59,20 @@ export default {
   background-size: cover;
   position: relative;
   .timeNum {
-    padding-top: 40px;
+    padding: 36px 50px 0px 70px;
     color: #fff;
-    font-size: 80px;
-    letter-spacing: 15px;
+    text-align: center;
+    span{
+      margin-right: 40px;
+      font-size: 80px;
+      letter-spacing: 15px;
+    }
+    /* span:nth-child(2){
+      margin-right: 30px;
+    } */
+    span:last-of-type{
+      margin-right: 0px;
+    }
   }
   .date {
     position: absolute;

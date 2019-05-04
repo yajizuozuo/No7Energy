@@ -10,18 +10,17 @@
           <!-- {{ $t('login.title') }} -->
           Welcome to login
         </h3>
-        <!-- <lang-select class="set-language" /> -->
       </div>
 
-      <el-form-item prop="username">
+      <el-form-item prop="employeeNo">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input
-          ref="username"
-          v-model="loginForm.username"
-          :placeholder="$t('login.username')"
-          name="username"
+          ref="employeeNo"
+          v-model="loginForm.employeeNo"
+          placeholder="请输入姓名"
+          name="employeeNo"
           type="text"
           tabindex="1"
           auto-complete="on"
@@ -38,13 +37,12 @@
             ref="password"
             v-model="loginForm.password"
             :type="passwordType"
-            :placeholder="$t('login.password')"
+            placeholder="请输入密码"
             name="password"
             tabindex="2"
             auto-complete="on"
             @keyup.native="checkCapslock"
             @blur="capsTooltip = false"
-            @keyup.enter.native="handleLogin"
           />
           <span class="show-pwd" @click="showPwd">
             <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
@@ -52,12 +50,30 @@
         </el-form-item>
       </el-tooltip>
 
+      <el-form-item prop="veriCode">
+        <span class="svg-container">
+          <svg-icon icon-class="user" />
+        </span>
+        <el-input
+          ref="veriCode"
+          v-model="loginForm.veriCode"
+          placeholder="请输入验证码"
+          name="veriCode"
+          type="text"
+          tabindex="1"
+          auto-complete="on"
+          @keyup.enter.native="handleLogin"
+        />
+        <span class="show-Captcha-Img" @click="showCaptchaImg">
+          <img :src="imageSrc">
+        </span>
+      </el-form-item>
+
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">
         {{ $t('login.logIn') }}
       </el-button>
-
-      <div style="position:relative">
-        <div class="tips">
+      <!-- <div style="position:relative"> -->
+      <!-- <div class="tips">
           <span>{{ $t('login.username') }} : admin</span>
           <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
         </div>
@@ -66,12 +82,12 @@
             {{ $t('login.username') }} : editor
           </span>
           <span>{{ $t('login.password') }} : {{ $t('login.any') }}</span>
-        </div>
+        </div> -->
 
-        <!-- <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
+      <!-- <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
           {{ $t('login.thirdparty') }}
         </el-button> -->
-      </div>
+      <!-- </div> -->
     </el-form>
 
     <!-- <el-dialog :title="$t('login.thirdparty')" :visible.sync="showDialog">
@@ -85,39 +101,49 @@
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
-
+// import { validUsername } from '@/utils/validate'
+import { getImage } from '@/api/user'
 export default {
   name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
+      if (!value) {
+        callback(new Error('请输入用户名'))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+        callback(new Error('请输入不低于6位的密码'))
+      } else {
+        callback()
+      }
+    }
+    const validateVeriCode = (rule, value, callback) => {
+      if (!value) {
+        callback(new Error('请输入用户名'))
       } else {
         callback()
       }
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: ''
+        employeeNo: 'S00023',
+        password: '123456',
+        veriCode: ''
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        employeeNo: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        password: [{ required: true, trigger: 'blur', validator: validatePassword }],
+        veriCode: [{ required: true, trigger: 'blur', validator: validateVeriCode }]
       },
       passwordType: 'password',
       capsTooltip: false,
       loading: false,
       showDialog: false,
-      redirect: undefined
+      redirect: undefined,
+      imageSrc: ''
     }
   },
   watch: {
@@ -132,8 +158,9 @@ export default {
     // window.addEventListener('storage', this.afterQRScan)
   },
   mounted() {
-    if (this.loginForm.username === '') {
-      this.$refs.username.focus()
+    this.showCaptchaImg()
+    if (this.loginForm.employeeNo === '') {
+      this.$refs.employeeNo.focus()
     } else if (this.loginForm.password === '') {
       this.$refs.password.focus()
     }
@@ -142,6 +169,18 @@ export default {
     // window.removeEventListener('storage', this.afterQRScan)
   },
   methods: {
+    showCaptchaImg() {
+      getImage()
+        .then(res => {
+          console.log(res)
+          if (res.code === 0) {
+            this.imageSrc = `data:image/jpeg;base64,${res.value}`
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
     checkCapslock({ shiftKey, key } = {}) {
       if (key && key.length === 1) {
         if (shiftKey && (key >= 'a' && key <= 'z') || !shiftKey && (key >= 'A' && key <= 'Z')) {
@@ -171,6 +210,7 @@ export default {
           this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
               this.$router.push({ path: this.redirect || '/' })
+              alert(1)
               this.loading = false
             })
             .catch(() => {
@@ -211,7 +251,7 @@ export default {
 $bg:#283443;
 $light_gray:#fff;
 $cursor: #fff;
-
+$text_color:#666;
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
   .login-container .el-input input {
     color: $cursor;
@@ -222,7 +262,7 @@ $cursor: #fff;
 .login-container {
   .el-input {
     display: inline-block;
-    height: 47px;
+    height: 45px;
     width: 85%;
 
     input {
@@ -231,8 +271,8 @@ $cursor: #fff;
       -webkit-appearance: none;
       border-radius: 0px;
       padding: 12px 5px 12px 15px;
-      color: $light_gray;
-      height: 47px;
+      color: $text_color;
+      height: 45px;
       caret-color: $cursor;
 
       &:-webkit-autofill {
@@ -243,11 +283,22 @@ $cursor: #fff;
   }
 
   .el-form-item {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    color: #454545;
+    /* border: 1px solid rgba(255, 255, 255, 0.22); */
+    /* border-image:linear-gradient(0deg, rgba(103,158,253,1), rgba(102,250,254,1)) 10 10; */
+    background: rgba(255,255,255,0.5);
+    /* border-radius: 23px; */
+    color: #666;
+    position: relative;
   }
+  .el-form-item::after{
+      position: absolute;
+      top: -1px; bottom: -1px;
+      left: -1px; right: -1px;
+      background: (to right, rgba(103,158,253,1), rgba(102,250,254,1));
+      content: '';
+      z-index: -1;
+      border-radius: 23px;
+    }
 }
 </style>
 
@@ -255,6 +306,7 @@ $cursor: #fff;
 $bg:#2d3a4b;
 $dark_gray:#889aa4;
 $light_gray:#eee;
+$text_color:#333;
 
 .login-container {
   min-height: 100%;
@@ -267,7 +319,7 @@ $light_gray:#eee;
 
   .login-form {
     position: relative;
-    width: 320px;
+    width: 440px;
     max-width: 100%;
     min-height: 100%;
     padding: 60px 35px 0;
@@ -303,28 +355,17 @@ $light_gray:#eee;
       text-align: center;
       img {
         display: inline-block;
-        width: 35%;
+        width: 100px;
       }
     }
     .title {
-      font-size: 26px;
-      color: $light_gray;
+      font-size: 18px;
+      color: $text_color;
       margin: 0px auto 40px auto;
       text-align: center;
-      font-weight: bold;
-    }
-
-    .set-language {
-      color: #fff;
-      position: absolute;
-      top: 3px;
-      font-size: 18px;
-      right: 0px;
-      cursor: pointer;
     }
   }
-
-  .show-pwd {
+  .show-pwd, .show-Captcha-Img{
     position: absolute;
     right: 10px;
     top: 7px;
@@ -333,16 +374,12 @@ $light_gray:#eee;
     cursor: pointer;
     user-select: none;
   }
-
-  .thirdparty-button {
-    position: absolute;
-    right: 0;
-    bottom: 6px;
-  }
-
-  @media only screen and (max-width: 470px) {
-    .thirdparty-button {
-      display: none;
+  .show-Captcha-Img{
+    top: 0px;
+    right: 0px;
+    img {
+      width: 100px;
+      height: 50px;
     }
   }
 }

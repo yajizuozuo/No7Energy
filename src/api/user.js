@@ -2,9 +2,15 @@ import request from '@/utils/request'
 
 export function login(data) {
   return request({
-    url: '/user/login',
+    url: '/api/seatMmb/centerLogin',
     method: 'post',
     data
+  })
+}
+export function getImage() {
+  return request({
+    url: '/api/authImage/getImage',
+    method: 'post'
   })
 }
 

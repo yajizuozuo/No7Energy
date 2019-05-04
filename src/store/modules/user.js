@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/user'
+import { login, logout, getInfo, getImage } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
@@ -31,9 +31,9 @@ const mutations = {
 const actions = {
   // user login
   login({ commit }, userInfo) {
-    const { username, password } = userInfo
+    const { employeeNo, password, veriCode } = userInfo
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
+      login({ employeeNo: employeeNo.trim(), password: password, veriCode: veriCode }).then(response => {
         const { data } = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)
@@ -81,6 +81,18 @@ const actions = {
         removeToken()
         resetRouter()
         resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+
+  // user getImage
+  getImage({ commit }) {
+    return new Promise((resolve, reject) => {
+      getImage().then(response => {
+        const { data } = response
+        resolve(data)
       }).catch(error => {
         reject(error)
       })
