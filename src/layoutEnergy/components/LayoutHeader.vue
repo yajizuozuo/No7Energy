@@ -105,6 +105,8 @@ export default {
   @import "~@/styles/variables.scss";
   .header {
     height: 87px;
+    width: 100%;
+    min-width: 1600px;
     /* border-bottom: 2px solid #679DFD; */
     .lineBox {
       width: 100%;
