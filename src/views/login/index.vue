@@ -122,7 +122,7 @@ export default {
     }
     const validateVeriCode = (rule, value, callback) => {
       if (!value) {
-        callback(new Error('请输入用户名'))
+        callback(new Error('请输入验证码'))
       } else {
         callback()
       }
@@ -208,9 +208,11 @@ export default {
         if (valid) {
           this.loading = true
           this.$store.dispatch('user/login', this.loginForm)
-            .then(() => {
-              this.$router.push({ path: this.redirect || '/' })
-              alert(1)
+            .then((data) => {
+              if (data.code === 0) {
+                alert(data.msg)
+              }
+              this.$router.push({ path: this.redirect || '/dashboard' })
               this.loading = false
             })
             .catch(() => {
@@ -247,7 +249,7 @@ export default {
 <style lang="scss">
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
-
+@import '@/styles/variables.scss';
 $bg:#283443;
 $light_gray:#fff;
 $cursor: #fff;
@@ -273,7 +275,7 @@ $text_color:#666;
       padding: 12px 5px 12px 15px;
       color: $text_color;
       height: 45px;
-      caret-color: $cursor;
+      caret-color: #333;
 
       &:-webkit-autofill {
         box-shadow: 0 0 0px 1000px $bg inset !important;
@@ -283,22 +285,31 @@ $text_color:#666;
   }
 
   .el-form-item {
-    /* border: 1px solid rgba(255, 255, 255, 0.22); */
-    /* border-image:linear-gradient(0deg, rgba(103,158,253,1), rgba(102,250,254,1)) 10 10; */
+    border: 1px solid rgba(103,158,253,1);
+    // border-image:linear-gradient(to right, rgba(103,158,253,1), rgba(102,250,254,1)) 10 10;
     background: rgba(255,255,255,0.5);
-    /* border-radius: 23px; */
+    border-radius: 23px;
     color: #666;
     position: relative;
   }
   .el-form-item::after{
       position: absolute;
-      top: -1px; bottom: -1px;
-      left: -1px; right: -1px;
-      background: (to right, rgba(103,158,253,1), rgba(102,250,254,1));
+      top: -1px;
+			bottom: -1px;
+      left: -1px;
+			right: -1px;
+      background: (0deg, rgba(103,158,253,1), rgba(102,250,254,1));
       content: '';
-      z-index: -1;
+      z-index: 1;
       border-radius: 23px;
     }
+	.el-button {
+		background: $loginBtnBg;
+		height: 46px;
+		border-radius: 23px;
+		font-size: 18px;
+		border: none;
+	}
 }
 </style>
 
@@ -327,6 +338,7 @@ $text_color:#333;
     overflow: hidden;
     background: url(./loginForm.png) no-repeat center;
     background-size: cover;
+		box-shadow:0px 0px 30px 0px rgba(103,158,253,0.2);
   }
 
   .tips {
@@ -376,7 +388,7 @@ $text_color:#333;
   }
   .show-Captcha-Img{
     top: 0px;
-    right: 0px;
+    right: 20px;
     img {
       width: 100px;
       height: 50px;

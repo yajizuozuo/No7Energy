@@ -60,6 +60,7 @@ export default {
     padding: 0;
   }
   .el-main {
+		width: 100%;
     background: url(./mainBackground.png) no-repeat center;
     background-size: cover;
   }
