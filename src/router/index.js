@@ -90,6 +90,32 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/vehicle-monitoring',
+    component: layoutEnergy,
+    redirect: '/vehicle-monitoring/index',
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/vehicle-monitoring/index'),
+        name: 'Busystem-index',
+        meta: { title: '车辆监控', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/work-order',
+    component: layoutEnergy,
+    redirect: '/work-order/index',
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/work-order/index'),
+        name: 'Busystem-index',
+        meta: { title: '工单', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
+  {
     path: '/dashboard',
     component: Layout,
     // redirect: 'dashboard',

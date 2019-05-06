@@ -56,22 +56,19 @@ export default {
         legend: {
           left: 'center',
           bottom: '10',
-          data: ['Industries', 'Technology', 'Forex', 'Gold', 'Forecasts']
+          data: ['未完成', '以完成']
         },
         calculable: true,
         series: [
           {
-            name: 'WEEKLY WRITE ARTICLES',
+            name: 'dataState',
             type: 'pie',
-            roseType: 'radius',
-            radius: [15, 95],
-            center: ['50%', '38%'],
+            // roseType: 'radius',
+            radius: [30, 90],
+            center: ['50%', '50%'],
             data: [
-              { value: 320, name: 'Industries' },
-              { value: 240, name: 'Technology' },
-              { value: 149, name: 'Forex' },
-              { value: 100, name: 'Gold' },
-              { value: 59, name: 'Forecasts' }
+              { value: 320, name: '未完成' },
+              { value: 240, name: '以完成' }
             ],
             animationEasing: 'cubicInOut',
             animationDuration: 2600
