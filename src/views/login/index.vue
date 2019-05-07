@@ -12,15 +12,15 @@
         </h3>
       </div>
 
-      <el-form-item prop="employeeNo">
+      <el-form-item prop="userName">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
         <el-input
-          ref="employeeNo"
-          v-model="loginForm.employeeNo"
+          ref="userName"
+          v-model="loginForm.userName"
           placeholder="请输入姓名"
-          name="employeeNo"
+          name="userName"
           type="text"
           tabindex="1"
           auto-complete="on"
@@ -129,12 +129,12 @@ export default {
     }
     return {
       loginForm: {
-        employeeNo: 'S00023',
+        userName: 'S00023',
         password: '123456',
         veriCode: ''
       },
       loginRules: {
-        employeeNo: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        userName: [{ required: true, trigger: 'blur', validator: validateUsername }],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }],
         veriCode: [{ required: true, trigger: 'blur', validator: validateVeriCode }]
       },
@@ -159,8 +159,8 @@ export default {
   },
   mounted() {
     this.showCaptchaImg()
-    if (this.loginForm.employeeNo === '') {
-      this.$refs.employeeNo.focus()
+    if (this.loginForm.userName === '') {
+      this.$refs.userName.focus()
     } else if (this.loginForm.password === '') {
       this.$refs.password.focus()
     }
@@ -172,9 +172,8 @@ export default {
     showCaptchaImg() {
       getImage()
         .then(res => {
-          console.log(res)
-          if (res.code === 0) {
-            this.imageSrc = `data:image/jpeg;base64,${res.value}`
+          if (res.code === 1) {
+            this.imageSrc = `data:image/jpeg;base64,${res.data.value}`
           }
         })
         .catch(error => {

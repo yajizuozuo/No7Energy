@@ -137,21 +137,32 @@
 </template>
 
 <script>
-import { getOrderList } from '@/api/workOrder'
+// import { orderDetail, repairCompleteList, cancelList, repairProcessList } from '@/api/workOrder'
+import { orderDetail, cancelList } from '@/api/workOrder'
 import MapDrag from '@/components/MapDrag/mapDrag'
 export default {
   components: {
     MapDrag
   },
   data: () => ({
-    value: 3.1
+    value: 3.1,
+    orderNo: 'R19030600000009',
+    pageInfo: {
+      pageNo: '1',
+      pageSize: '10'
+    }
   }),
   created() {
-    this.getOrderListData()
+    this.getOrderDetail()
   },
   methods: {
-    getOrderListData() {
-      getOrderList({ 'pageNo': 1, 'pageSize': 3 }).then(res => {
+    getRepairCompleteList() {
+      cancelList(this.pageInfo).then(res => {
+        console.log(res)
+      })
+    },
+    getOrderDetail() {
+      orderDetail({ 'orderNo': this.orderNo }).then(res => {
         console.log(res)
       })
     }

@@ -2,14 +2,14 @@ import request from '@/utils/request'
 
 export function login(data) {
   return request({
-    url: '/api/seatMmb/centerLogin',
+    url: '/login',
     method: 'post',
     data
   })
 }
 export function getImage() {
   return request({
-    url: '/api/authImage/getImage',
+    url: '/login/captcha',
     method: 'post'
   })
 }

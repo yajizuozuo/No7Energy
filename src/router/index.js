@@ -12,7 +12,7 @@ import componentsRouter from './modules/components'
 import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
 import nestedRouter from './modules/nested'
-
+import workorderRouter from './modules/workorder'
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -102,19 +102,7 @@ export const constantRoutes = [
       }
     ]
   },
-  {
-    path: '/work-order',
-    component: layoutEnergy,
-    redirect: '/work-order/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/work-order/index'),
-        name: 'Busystem-index',
-        meta: { title: '工单', icon: 'dashboard', affix: true }
-      }
-    ]
-  },
+  workorderRouter,
   {
     path: '/dashboard',
     component: Layout,
