@@ -21,6 +21,12 @@
   }
 }
 
+@mixin boxShadow {
+  background:rgba(255,255,255,1);
+	box-shadow:0px 20px 30px 0px rgba(103,157,253,0.2);
+	border-radius:10px;
+}
+
 @mixin relative {
   position: relative;
   width: 100%;

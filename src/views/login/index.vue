@@ -209,10 +209,20 @@ export default {
           this.loading = true
           this.$store.dispatch('user/login', this.loginForm)
             .then((data) => {
+              console.log(data)
               if (data.code === 0) {
-                alert(data.msg)
+                this.$message({
+                  message: data.msg,
+                  type: 'error',
+                  duration: 5 * 1000
+                })
+                // alert(data.msg)
               }
-              this.$router.push({ path: this.redirect || '/dashboard' })
+              if (data.code === 1) {
+                sessionStorage.setItem('token', data.data.token)
+                this.$router.push({ path: this.redirect || '/dashboard' })
+              }
+
               this.loading = false
             })
             .catch(() => {

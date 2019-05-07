@@ -34,10 +34,10 @@ const actions = {
     const { employeeNo, password, veriCode } = userInfo
     return new Promise((resolve, reject) => {
       login({ employeeNo: employeeNo.trim(), password: password, veriCode: veriCode }).then(response => {
-        const { data } = response
+        // const { data } = response
         //         commit('SET_TOKEN', data.data.token)
         //         setToken(data.data.token)
-        resolve(data)
+        resolve(response)
       }).catch(error => {
         reject(error)
       })
