@@ -219,9 +219,9 @@ export default {
               }
               if (data.code === 1) {
                 sessionStorage.setItem('token', data.data.token)
-                this.$router.push({ path: this.redirect || '/dashboard' })
+                sessionStorage.setItem('userInfo', JSON.stringify(data.data.PCUser))
+                this.$router.push({ name: 'Busystem-index' })
               }
-
               this.loading = false
             })
             .catch(() => {

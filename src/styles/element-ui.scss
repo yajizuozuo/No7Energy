@@ -77,3 +77,27 @@
 .el-range-editor.el-input__inner {
   display: inline-flex !important;
 }
+
+.el-table th.is-leaf, .el-table td {
+  border-bottom: 0px;
+}
+.el-table tr {
+  background:rgba(103,158,253,0.05);
+  color: rgba(103, 157, 253, 1);
+}
+.el-table tr.hover-row td {
+  background:rgba(103,158,253,0.15);
+}
+.el-table--striped .el-table__body tr.el-table__row--striped td {
+  background:rgba(103,158,253,0.15);
+}
+.el-table .cell {
+  text-align: center;
+  white-space: nowrap;
+}
+.fixBox{
+  background: rgb(247, 250, 255);
+}
+.el-table--striped .el-table__body tr.el-table__row--striped td.fixBox,.el-table tr.hover-row td.fixBox {
+  background: rgb(225, 237, 255);
+}

@@ -61,8 +61,9 @@ export default {
   }
   .el-main {
     width: 100%;
-    min-width: 1600px;
+    min-width: 1920px;
     background: url(./mainBackground.png) no-repeat center;
     background-size: cover;
+    padding: 50px;
   }
 </style>

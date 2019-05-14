@@ -14,20 +14,20 @@ const workorderRouter = {
   children: [
     {
       path: 'repair',
-      component: () => import('@/views/workorder/repair/repairComplete'), // Parent router-view
+      component: () => import('@/views/workorder/repair/index'), // Parent router-view
       name: 'Repair',
       meta: { title: '维修工单' },
       redirect: '/workorder/repair/repairComplete',
       children: [
         {
           path: 'repairComplete',
-          component: () => import('@/views/workorder/repair/repairComplete'),
+          component: () => import('@/views/workorder/repair/repairComplete/index'),
           name: 'repairComplete',
           meta: { title: '维修完成' }
         },
         {
           path: 'repairProcess',
-          component: () => import('@/views/workorder/repair/repairProcess'),
+          component: () => import('@/views/workorder/repair/repairProcess/index'),
           name: 'RepairProcess',
           meta: { title: '维修中' }
         }

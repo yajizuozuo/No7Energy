@@ -5,7 +5,6 @@
       :current-page.sync="currentPage"
       :page-size.sync="pageSize"
       :layout="layout"
-      :page-sizes="pageSizes"
       :total="total"
       v-bind="$attrs"
       @size-change="handleSizeChange"
@@ -32,15 +31,15 @@ export default {
       type: Number,
       default: 20
     },
-    pageSizes: {
-      type: Array,
-      default() {
-        return [10, 20, 30, 50]
-      }
-    },
+    // pageSizes: {
+    //   type: Array,
+    //   default() {
+    //     return 10
+    //   }
+    // },
     layout: {
       type: String,
-      default: 'total, sizes, prev, pager, next, jumper'
+      default: 'prev, pager, next'
     },
     background: {
       type: Boolean,
@@ -92,8 +91,8 @@ export default {
 
 <style scoped>
 .pagination-container {
-  background: #fff;
   padding: 32px 16px;
+  text-align: center
 }
 .pagination-container.hidden {
   display: none;

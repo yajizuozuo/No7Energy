@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
+import router from '@/router'
 // import store from '@/store'
 // import { getToken } from '@/utils/auth'
 
@@ -52,13 +53,15 @@ service.interceptors.response.use(
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 0 && res.code !== 1) {
       Message({
-        message: res.message || 'error',
+        message: res.msg || 'error',
         type: 'error',
         duration: 5 * 1000
       })
-
+      if (res.code === 20015) {
+        router.push({ path: '/home' })
+      }
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      //       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
+      //       if (res.code === 20015 || res.code === 50012 || res.code === 50014) {
       //         // to re-login
       //         MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
       //           confirmButtonText: 'Re-Login',
@@ -70,7 +73,7 @@ service.interceptors.response.use(
       //           })
       //         })
       //       }
-      //       return Promise.reject(res.message || 'error')
+      return Promise.reject(res.msg || 'error')
     } else {
       return res
     }
@@ -78,7 +81,7 @@ service.interceptors.response.use(
   error => {
     console.log('err' + error) // for debug
     Message({
-      message: error.message,
+      message: error.msg,
       type: 'error',
       duration: 5 * 1000
     })

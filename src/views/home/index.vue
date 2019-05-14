@@ -8,10 +8,16 @@
       <p>7#综合业务系统</p>
       <p>integrated business system</p>
     </div>
-    <button @click="gopage">登录</button>
     <div class="logoBox">
-      <div class="logoDiv">
-        <img src="">
+      <div class="flexBox">
+        <div class="logoDiv" @click="gopage">
+          <img src="./业务平台icon@2x.png">
+          <span>业务平台</span>
+        </div>
+        <div class="logoDiv">
+          <img src="./管理平台icon@2x.png">
+          <span>管理平台</span>
+        </div>
       </div>
     </div>
   </div>
@@ -63,9 +69,26 @@ export default {
   }
   .logoBox{
     position: absolute;
-    bottom: 100px;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
+    .flexBox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .logoDiv{
+        padding: 20px;
+        padding-bottom: 0px;
+        cursor: pointer;
+        img{
+          width: 100px;
+        }
+        span{
+          display: block;
+          text-align: center;
+        }
+      }
+    }
   }
 }
 </style>

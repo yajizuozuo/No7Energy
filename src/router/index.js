@@ -52,14 +52,21 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/',
+    redirect: '/home',
+    component: () => import('@/views/home/index')
+  },
+  {
     path: '/home',
+    hidden: true,
     component: () => import('@/views/home/index'),
-    hidden: true
+    meta: { title: '首页' }
   },
   {
     path: '/login',
     component: () => import('@/views/login/index'),
-    hidden: true
+    hidden: true,
+    meta: { title: '业务平台登录' }
   },
   {
     path: '/auth-redirect',
@@ -77,7 +84,7 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '',
+    path: '/dashboard',
     component: layoutEnergy,
     redirect: 'dashboard',
     children: [
@@ -85,7 +92,7 @@ export const constantRoutes = [
         path: 'dashboard',
         component: () => import('@/views/busystem-index/index'),
         name: 'Busystem-index',
-        meta: { title: 'busystem-index', icon: 'dashboard', noCache: true, affix: true }
+        meta: { title: '业务平台首页', icon: 'dashboard', affix: true }
       }
     ]
   },
@@ -103,19 +110,19 @@ export const constantRoutes = [
     ]
   },
   workorderRouter,
-  {
-    path: '/dashboard',
-    component: Layout,
-    // redirect: 'dashboard',
-    children: [
-      {
-        path: 'dashboard',
-        component: () => import('@/views/dashboard/index'),
-        name: 'Dashboard',
-        meta: { title: 'dashboard', icon: 'dashboard', noCache: true, affix: true }
-      }
-    ]
-  },
+  // {
+  //   path: '/dashboard',
+  //   component: Layout,
+  //   // redirect: 'dashboard',
+  //   children: [
+  //     {
+  //       path: 'dashboard',
+  //       component: () => import('@/views/dashboard/index'),
+  //       name: 'Dashboard',
+  //       meta: { title: 'dashboard', icon: 'dashboard', noCache: true, affix: true }
+  //     }
+  //   ]
+  // },
   {
     path: '/documentation',
     component: Layout,
