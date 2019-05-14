@@ -5,6 +5,42 @@
     <!-- <panel-group @handleSetLineChartData="handleSetLineChartData" /> -->
     <!-- <> -->
     <data-state />
+    <div class="flexDiv">
+      <div class="left" />
+      <div class="center">
+        <p><img src="./image/电池租赁@2x.png"></p>
+        <p>电池租赁</p>
+        <p class="subTitle">Battery Leasing</p>
+        <div class="backBox"><img src="./image/电池租赁底@2x.png"></div>
+      </div>
+      <div class="right">
+        <div class="flexBox">
+          <div class="">
+            <div class="itemCell">
+              <el-progress :show-text="false" :percentage="70" />
+            </div>
+            <div class="itemCell">
+              <el-progress :show-text="false" :percentage="70" />
+            </div>
+          </div>
+          <div class="">
+            <div class="itemCell">
+              <el-progress :show-text="false" :percentage="70" />
+            </div>
+            <div class="itemCell">
+              <el-progress :show-text="false" :percentage="70" />
+            </div>
+          </div>
+          <div class="">
+            <div class="itemCell">
+              <el-progress :show-text="false" :percentage="70" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="flexDiv" />
     <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
       <line-chart :chart-data="lineChartData" />
     </el-row>
@@ -99,18 +135,67 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixin.scss';
 .dashboard-editor-container {
   padding: 32px;
   background-color: transparent;
   position: relative;
-
-  .github-corner {
-    position: absolute;
-    top: 0px;
-    border: 0;
-    right: 0;
+  .flexDiv {
+    display: flex;
+    height: 200px;
+    .left {
+      width: 390px;
+      height: 200px;
+      margin-right: 30px;
+      @include boxShadow;
+    }
+    .center {
+      width:150px;
+      height:200px;
+      @include boxShadow;
+      background-color:rgba(102,231,253,1);
+      margin-right: 10px;
+      position: relative;
+      padding: 40px 20px 20px 20px;
+      p {
+        font-size:24px;
+        font-weight:bold;
+        color:rgba(255,255,255,1);
+        &.subTitle {
+          font-size:14px;
+        }
+        img {
+          width: 20px;
+        }
+      }
+      .backBox {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 80px;
+        height: 80px;
+        img{
+          width: 100%;
+        }
+      }
+    }
+    .right {
+      width:1020px;
+      height:200px;
+      padding: 40px;
+      @include boxShadow;
+      .flexBox{
+        display: flex;
+        div{
+          flex: 1;
+          border-right: 1px solid #F2F2F5;
+          &:last-of-type{
+            border-right: none;
+          }
+        }
+      }
+    }
   }
-
   .chart-wrapper {
     background: #fff;
     padding: 16px 16px 0;

@@ -53,6 +53,24 @@ export default {
           text: '10000km',
           sum: '1000',
           imgSrc: image4
+        },
+        {
+          id: '6',
+          text: '10000km',
+          sum: '1000',
+          imgSrc: image4
+        },
+        {
+          id: '7',
+          text: '10000km',
+          sum: '1000',
+          imgSrc: image4
+        },
+        {
+          id: '8',
+          text: '10000km',
+          sum: '1000',
+          imgSrc: image4
         }
       ]
     }
@@ -102,7 +120,7 @@ export default {
           font-size: 14px;
         }
         img{
-          width: 90px;
+          width: 89px;
           margin-top: 20px;
         }
         &::after{

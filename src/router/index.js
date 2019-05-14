@@ -105,7 +105,33 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/vehicle-monitoring/index'),
         name: 'Busystem-index',
-        meta: { title: '车辆监控', icon: 'dashboard', affix: true }
+        meta: { title: '汽车租赁', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/carRental',
+    component: layoutEnergy,
+    redirect: '/carRental/index',
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/vehicle-monitoring/carRental/carRental'),
+        name: 'carRental',
+        meta: { title: '汽车租赁厂商', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/carRentalDetail',
+    component: layoutEnergy,
+    redirect: '/carRentalDetail/index',
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/vehicle-monitoring/carRentalDetail/index'),
+        name: 'carRentalDetail',
+        meta: { title: '复杂详情', affix: true }
       }
     ]
   },

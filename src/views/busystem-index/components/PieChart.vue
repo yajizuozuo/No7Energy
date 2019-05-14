@@ -20,6 +20,10 @@ export default {
     height: {
       type: String,
       default: '300px'
+    },
+    name: {
+      type: String,
+      default: '车主签约'
     }
   },
   data() {
@@ -54,18 +58,18 @@ export default {
           formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
         legend: {
-          left: 'center',
-          bottom: '10',
-          data: ['未完成', '以完成']
+          left: '10',
+          bottom: '30',
+          data: ['未完成', '已完成']
         },
         calculable: true,
         series: [
           {
-            name: 'dataState',
+            name: this.name,
             type: 'pie',
             // roseType: 'radius',
             radius: [30, 90],
-            center: ['50%', '50%'],
+            center: ['40%', '50%'],
             data: [
               { value: 320, name: '未完成' },
               { value: 240, name: '以完成' }
