@@ -19,7 +19,7 @@ export default {
     },
     height: {
       type: String,
-      default: '300px'
+      default: '200px'
     },
     name: {
       type: String,
@@ -58,7 +58,8 @@ export default {
           formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
         legend: {
-          left: '10',
+          orient: 'vertical',
+          left: '40',
           bottom: '30',
           data: ['未完成', '已完成']
         },
@@ -68,11 +69,15 @@ export default {
             name: this.name,
             type: 'pie',
             // roseType: 'radius',
-            radius: [30, 90],
-            center: ['40%', '50%'],
+            radius: '50%',
+            center: ['80%', '40%'],
+            label: {
+              show: true,
+              position: 'inside'
+            },
             data: [
               { value: 320, name: '未完成' },
-              { value: 240, name: '以完成' }
+              { value: 240, name: '已完成' }
             ],
             animationEasing: 'cubicInOut',
             animationDuration: 2600
