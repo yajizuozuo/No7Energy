@@ -73,7 +73,8 @@ export default {
             center: ['80%', '40%'],
             label: {
               show: true,
-              position: 'inside'
+              position: 'inside',
+              formatter: '{d}%'
             },
             data: [
               { value: 320, name: '未完成' },

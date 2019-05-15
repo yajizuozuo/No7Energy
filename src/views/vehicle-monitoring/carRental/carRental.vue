@@ -5,7 +5,7 @@
         {{ name }}
       </div>
       <div class="contentBox">
-        <div class="databox" />
+        <div class="databox"><pie-chart /></div>
         <div class="huanBox">
           <div v-for="item in dataList" :key="item.id" class="itemCell">
             <p class="sumBox">{{ item.sum }}</p>
@@ -66,8 +66,9 @@ import image3 from '../3.png'
 import image4 from '../4.png'
 import { repairCompleteList } from '@/api/workOrder'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
+import PieChart from '@/views/busystem-index/components/PieChart'
 export default {
-  components: { Pagination },
+  components: { Pagination, PieChart },
   data: () => ({
     name: '新沃科技',
     list: null,

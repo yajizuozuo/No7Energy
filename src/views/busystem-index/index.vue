@@ -145,6 +145,9 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/styles/mixin.scss';
+p {
+  margin: 0;
+}
 .dashboard-editor-container {
   padding: 32px;
   background-color: transparent;
@@ -172,6 +175,7 @@ export default {
         font-size:24px;
         font-weight:bold;
         color:rgba(102,102,102,1);
+        margin-bottom: 10px;
         img{
           width: 22px;
           vertical-align: middle;
@@ -185,6 +189,7 @@ export default {
         line-height: 50px;
         p{
           line-height: 50px;
+          margin: 0;
           .num{
             display: inline-block;
             width: 18px;
