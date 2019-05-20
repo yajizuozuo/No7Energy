@@ -229,7 +229,7 @@ export default {
     box-shadow: 0px 5px 15px 0px rgba(103,157,253,0.2);
     width: 130px;
     border: none;
-    background: rgba(103, 158, 253, 0.6);
+    background: rgba(103, 158, 253, 0.8);
     /* left: 0px!important; */
     border-radius: 0px;
     margin: 0;
@@ -249,7 +249,7 @@ export default {
     .twoMenuList {
       height: 50px;
       width: 100%;
-      background: rgba(103, 158, 253, 0.2);
+      background: rgba(103, 158, 253, 0.4);
       bottom: 50px;
       left: 0px;
       .el-dropdown {
@@ -291,8 +291,12 @@ export default {
           height: 87px;
           line-height: 87px;
           text-align: center;
-          color: #d1d6dc;
+          color: #67C9FD;
+          font-size: 14px;
           cursor: pointer;
+          i {
+            padding-right: 10px;
+          }
           img {
             width: 60px;
             vertical-align: middle;

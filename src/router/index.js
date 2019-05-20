@@ -105,7 +105,7 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/vehicle-monitoring/index'),
         name: 'Busystem-index',
-        meta: { title: '汽车租赁', icon: 'dashboard', affix: true }
+        meta: { title: '车辆监控', icon: 'dashboard', affix: true }
       }
     ]
   },
